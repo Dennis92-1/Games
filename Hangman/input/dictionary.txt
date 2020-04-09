@@ -1,0 +1,10 @@
+Hund
+Katze
+Maus
+Giraffe
+Hase
+Loewe
+Tiger
+Schildkroete
+Ratte
+Schmetterling
