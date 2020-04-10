@@ -1,13 +1,17 @@
 package game;
 
 import java.awt.Point;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import gui.Gui;
 
 public class Snake {
 	
-	public static int score = 0, bestscore = 0;
+	public static int score = 0, bestscore = loadBestScore(), bestScoreCheck = bestscore;
 	
 	public static boolean waitToMove = false;
 	
@@ -78,5 +82,32 @@ public class Snake {
 		
 		return p;
 	}
+	
+	private static int loadBestScore() {
+		
+		File file = new File("BestScore.txt");
+		int bestScore = 0;
 
+        if (!file.canRead() || !file.isFile())
+            System.exit(0);
+
+            BufferedReader in = null;
+        try {
+            in = new BufferedReader(new FileReader("BestScore.txt"));
+            String zeile = null;
+            while ((zeile = in.readLine()) != null) {
+                bestScore = Integer.valueOf(zeile);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null)
+                try {
+                    in.close();
+                } catch (IOException e) {
+                }
+        }
+        
+        return bestScore;	
+	}
 }
